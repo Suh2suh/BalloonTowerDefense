@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8293889149391176974}
   - component: {fileID: 8293889149391176973}
   - component: {fileID: 8293889149391176972}
-  - component: {fileID: -2092884169190626088}
   m_Layer: 0
   m_Name: BalloonYellow
   m_TagString: Balloon
@@ -98,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab41c92c380d1d47b3f1d70cdb05456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.11
-  vec: {x: 0, y: 0, z: 0}
+  speed: 0.08
+  rewardMoney: 9
+  subBalloon: {fileID: 5241548977568707803, guid: 0c066c1d85992a14a8127934bdd4634d, type: 3}
 --- !u!58 &8293889149391176973
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,17 +137,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-2092884169190626088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8293889149391176971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23b621cef3ddcb44a764eb4242626d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mon: 9
-  gam: {fileID: 5241548977568707803, guid: 0c066c1d85992a14a8127934bdd4634d, type: 3}

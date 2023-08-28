@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b1fd71d0ee4c44eb8cd8c51a24b3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isinstall: 0
+  isinstalled: 0
 --- !u!58 &2279665477596087446
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,4 +112,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.107746124}
   serializedVersion: 2
-  m_Radius: 11
+  m_Radius: 15

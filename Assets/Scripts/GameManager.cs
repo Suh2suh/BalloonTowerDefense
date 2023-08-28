@@ -4,49 +4,79 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static public short round = 1;
+    static public short round = 9;
     static public short life = 30;
     static public int money = 650;
-    static public int kill = 0;
+
+    [SerializeField] Canvas Canvas;
+    [SerializeField] BalloonCreater BalloonCreater;
+
+    static public int destroyedBalloonInRound = 0;
     int maxround = 10;
-    float nextRoundTime = 0;
-    public Canvas canvas;
+    float RoundPreparingTime = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
+
     void Update()
     {
         if(life > 0)
         {
-            if (kill == BalloonCreater.balloonnum && BalloonCreater.balloonnum > 0)
+            if (IsThisRoneDone())
             {
-                nextRoundTime += Time.deltaTime;
-                if (nextRoundTime > 5)
-                    if (round < maxround)
+                if (round < maxround)
+                {
+                    RoundPreparingTime += Time.deltaTime;
+
+                    if (RoundPreparingTime > 5.0f)
                     {
-                        kill = 0;
-                        BalloonCreater.balloonnum = 0;
-                        round++;
-                        Debug.Log(round.ToString() + "라운드 시작");
-                        nextRoundTime = 0;
+                        StartNewRound();
+
+                        RoundPreparingTime = 0.0f;
                     }
+                }
                 else
-                    {
-                        GameObject.Find("Panel").SetActive(false);
-                        canvas.gameObject.transform.Find("WinPanel").gameObject.SetActive(true);
-                    }
+                {
+                    ProcessWin();
+                }
             }
         }
 
         else
         {
-            GameObject.Find("Panel").SetActive(false);
-            canvas.gameObject.transform.Find("LosePanel").gameObject.SetActive(true);
+            ProcessLose();
         }
     }
+
+
+    bool IsThisRoneDone()
+    {
+        Debug.Log("Destroyed: " + destroyedBalloonInRound + "/ Max: " + BalloonCreater.MaxBalloonPerRound[round-1]);
+
+        return (destroyedBalloonInRound == BalloonCreater.MaxBalloonPerRound[round-1]);
+
+    }
+    void StartNewRound()
+    {
+        Debug.Log("Round Start");
+
+        destroyedBalloonInRound = 0;
+        BalloonCreater.spawnedBalloonNum = 0;
+
+        round++;
+    }
+
+
+    void ProcessWin()
+    {
+        Canvas.transform.Find("Panel").gameObject.SetActive(false);
+        Canvas.gameObject.transform.Find("WinPanel").gameObject.SetActive(true);
+    }
+
+    void ProcessLose()
+    {
+        Canvas.transform.Find("Panel").gameObject.SetActive(false);
+        Canvas.gameObject.transform.Find("LosePanel").gameObject.SetActive(true);
+    }
+
 }

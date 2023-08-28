@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BalloonCreater : MonoBehaviour
 {
-    float spontime;
-    static public int balloonnum;
+    float spawnTime;
+    static public int spawnedBalloonNum = 0;
 
     public GameObject red;
     public GameObject yellow;
@@ -13,163 +13,93 @@ public class BalloonCreater : MonoBehaviour
     public GameObject sky;
     public GameObject pink;
 
-    // Update is called once per frame
+    List<int> maxBalloonPerRound = new List<int> { 10, 10, 12, 10, 10, 15, 10, 10, 5, 10 };
+    public List<int> MaxBalloonPerRound
+    {
+        get {   return maxBalloonPerRound;  }
+    }
+
+    List<float> spawnTimePerRound = new List<float> { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.8f, 0.8f, 0.9f, 0.9f };
+
+
     void Update()
     {
-        spontime += Time.deltaTime;
-        switch(GameManager.round)
-        {
-            case 1:
-                if(balloonnum < 10)
-                {
-                    if (spontime > 0.5f)
-                    {
-                        Instantiate(red, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 2:
-                if (balloonnum < 10)
-                {
-                    if (spontime > 0.5f)
-                    {
-                        if(balloonnum < 5)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        else
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 3:
-                if (balloonnum < 12)
-                {
-                    if (spontime > 0.5f)
-                    {
-                        if (balloonnum < 7)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        else
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 4:
-                if (balloonnum < 10)
-                {
-                    if (spontime > 0.5f)
-                    {
-                        if (balloonnum < 5)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        else if(balloonnum < 9)
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        else
-                            Instantiate(green, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 5:
-                if (balloonnum < 10)
-                {
-                    if (spontime > 0.5f)
-                    {
-                        if (balloonnum < 7)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        else if (balloonnum < 10)
-                            Instantiate(green, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 6:
-                if (balloonnum < 15)
-                {
-                    if (spontime > 0.5f)
-                    {
-                        if (balloonnum < 10)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        else if(balloonnum < 11)
-                            Instantiate(sky, transform.position, Quaternion.identity);
-                        else if(balloonnum < 15)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 7:
-                if (balloonnum < 10)
-                {
-                    if (spontime > 0.8f)
-                    {
-                        if (balloonnum < 10)
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 8:
-                if (balloonnum < 10)
-                {
-                    if (spontime > 0.8f)
-                    {
-                        if (balloonnum < 5)
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        else if (balloonnum < 6)
-                            Instantiate(sky, transform.position, Quaternion.identity);
-                        else if (balloonnum < 9)
-                            Instantiate(red, transform.position, Quaternion.identity);
-                        else
-                            Instantiate(pink, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 9:
-                if (balloonnum < 5)
-                {
-                    if (spontime > 0.9f)
-                    {
-                        Instantiate(pink, transform.position, Quaternion.identity);
-                        balloonnum++;
-                        spontime = 0;
-                    }
-                }
-                break;
-            case 10:
-                if (balloonnum < 10)
-                {
-                    if (spontime > 0.9f)
-                    {
-                        if(balloonnum < 1)
-                           Instantiate(pink, transform.position, Quaternion.identity);
-                        else if(balloonnum < 3)
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        else if(balloonnum < 5)
-                            Instantiate(green, transform.position, Quaternion.identity);
-                        else if(balloonnum < 6)
-                            Instantiate(pink, transform.position, Quaternion.identity);
-                        else if(balloonnum < 9)
-                            Instantiate(yellow, transform.position, Quaternion.identity);
-                        else
-                            Instantiate(pink, transform.position, Quaternion.identity);
+        spawnTime += Time.deltaTime;
 
-                        balloonnum++;
-                        spontime = 0;
-                    }
+        if (spawnedBalloonNum < maxBalloonPerRound[GameManager.round - 1])
+        {
+            if (spawnTime > spawnTimePerRound[GameManager.round - 1])
+            {
+                switch (GameManager.round)
+                {
+                    case 1:
+                        Instantiate(red, transform.position, Quaternion.identity);
+
+                        break;
+                    case 2:
+                        if (spawnedBalloonNum < 5) CreateBalloon(red);
+                        else                       CreateBalloon(yellow);
+
+                        break;
+                    case 3:
+                        if (spawnedBalloonNum < 7) CreateBalloon(red);
+                        else                       CreateBalloon(yellow);
+
+                        break;
+                    case 4:
+                        if (spawnedBalloonNum < 5)      CreateBalloon(red);
+                        else if (spawnedBalloonNum < 9) CreateBalloon(yellow);
+                        else                            CreateBalloon(green);
+
+                        break;
+                    case 5:
+                        if (spawnedBalloonNum < 7)       CreateBalloon(red);
+                        else if (spawnedBalloonNum < 10) CreateBalloon(green);
+
+                        break;
+                    case 6:
+                        if (spawnedBalloonNum < 10)      CreateBalloon(red);
+                        else if (spawnedBalloonNum < 11) CreateBalloon(sky);
+                        else if (spawnedBalloonNum < 15) CreateBalloon(red);
+
+                        break;
+                    case 7:
+                        if (spawnedBalloonNum < 10) CreateBalloon(yellow);
+
+                        break;
+                    case 8:
+                        if (spawnedBalloonNum < 5)      CreateBalloon(yellow);
+                        else if (spawnedBalloonNum < 6) CreateBalloon(sky);
+                        else if (spawnedBalloonNum < 9) CreateBalloon(red);
+                        else                            CreateBalloon(pink);
+
+                        break;
+                    case 9:
+                        CreateBalloon(pink);
+
+                        break;
+                    case 10:
+                        if (spawnedBalloonNum < 1)      CreateBalloon(pink);
+                        else if (spawnedBalloonNum < 3) CreateBalloon(yellow);
+                        else if (spawnedBalloonNum < 5) CreateBalloon(green);
+                        else if (spawnedBalloonNum < 6) CreateBalloon(pink);
+                        else if (spawnedBalloonNum < 9) CreateBalloon(yellow);
+                        else                            CreateBalloon(pink);
+
+                        break;
+                    default:
+                        Debug.Log("Round Limit Over Error in BalloonCreater.cs");
+                        break;
                 }
-                break;
-            default:
-                break;
+
+                spawnedBalloonNum++;
+                spawnTime = 0;
+            }
         }
+    }
+
+    void CreateBalloon(GameObject Balloon)
+    {
+        Instantiate(Balloon, transform.position, Quaternion.identity);
     }
 }

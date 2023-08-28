@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5241548977568707802}
   - component: {fileID: 5241548977568707799}
   - component: {fileID: 5241548977568707798}
-  - component: {fileID: 9077270796714907202}
   m_Layer: 0
   m_Name: BalloonRed
   m_TagString: Balloon
@@ -98,8 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab41c92c380d1d47b3f1d70cdb05456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.11
-  vec: {x: 0, y: 0, z: 0}
+  speed: 0.08
+  rewardMoney: 8
+  subBalloon: {fileID: 0}
 --- !u!58 &5241548977568707799
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,17 +137,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9077270796714907202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5241548977568707803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23b621cef3ddcb44a764eb4242626d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mon: 8
-  gam: {fileID: 0}

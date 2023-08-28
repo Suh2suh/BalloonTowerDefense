@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155991692549d4d4eb43c63d98e7adc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isinstalled: 0
   dart_: {fileID: 3050750095717222065, guid: 9487a867a993fdb49b457ab918a82bc2, type: 3}
-  isinstall: 0
 --- !u!1 &3427888553061909354
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 3427888553061909355}
   - component: {fileID: 3427888553061909353}
   m_Layer: 0
-  m_Name: MonkeySprite
+  m_Name: SuperMonkeySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
